@@ -1,0 +1,7 @@
+TurtleMode
+
+If you use TransmissionBT and your router's QoS sucks, this could help.
+
+The purpose of this program is to handle the throttling of the Transmission BT clients on your network.
+
+Rather than relying on a timed schedule, this script will attempt to detect priority devices and throttle BT traffic while they are in use.
