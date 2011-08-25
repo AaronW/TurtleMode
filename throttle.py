@@ -10,6 +10,10 @@ import transmissionrpc
 node_list = []              # List of Transmission clients currently managed by the script.
 
 def main():
+    command_prompt()
+
+def command_prompt():
+    """The temporary command prompt design for testing purposes."""
     print "\nWelcome to TurtleMode!\n"
     list_nodes()
     while(True):
@@ -34,7 +38,7 @@ def turtle_all():
             node.turtle_on
 
 def full_speed_all():
-	""""""
+	"""Turn off turtle mode on all nodes."""
 	if len(node_list) is 0:
 		print "No nodes currently."
 	else:
@@ -78,30 +82,27 @@ def del_node():
 
 class Node:
     """Represents a machine to administer."""
-    tc = None
-    node_address = ""
-
     def __init__(self, add, portnum, username, passw):
         """TODO: more consistent naming"""
-        Node.tc = transmissionrpc.Client(add, port=portnum, user=username, password=passw)
-        #self.tc = transmissionrpc.Client(add, port=portnum, user=username, password=passw)
-        Node.node_address = add
-        print "Client < %s > added." % add
+        self.tc = transmissionrpc.Client(add, port=portnum, user=username, password=passw)
+        self.node_address = add
+        print "Client < %s > added." % self.node_address
     
     def __str__(self):
         """Build readable output."""
-        return str(Node.node_address)
+        return str(self.node_address)
 
     def __repr__(self):
-        return Node.node_address
+        return self.node_address
     
-    def turtle_on():
+    def turtle_on(self):
         """Turn ON the speed-limiting mode."""
-        Node.tc.set_session(timeout=None, alt_speed_time_enabled=1)
+        self.tc.set_session(timeout=None, alt_speed_enabled=True)
 
-    def turtle_off():
+    def turtle_off(self):
         """Turn OFF the speed-limiting mode."""
-        Node.tc.set_session(timeout=None, alt_speed_enabled=False)
+        self.tc.set_session(timeout=None, alt_speed_enabled=False)
+
 
 if __name__ == '__main__':
     main()
